@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  auth0Id      String   @unique @default("")
+  name         String?
+  description  String?
+  subscriptions Channel[] @relation("UserSub")
+  favourites   Video[]  @relation("UserFavor")
+}
+
+model Video{
+  id           String   @unique @id
+  description  String
+  cover        String
+  title        String
+  favoredBy    User[]   @relation("UserFavor")
+}
+
+model Channel{
+  id           String   @unique @id
+  description  String
+  avatar       String
+  name         String
+  followedBy   User[]   @relation("UserSub")
+}

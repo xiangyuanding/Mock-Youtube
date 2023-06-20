@@ -1,0 +1,17 @@
+.left-right{
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+
+.left{
+  list-Style-Type: '';
+  position: absolute;
+
+}
+
+.right{
+  list-Style-Type: '';
+  margin-left: 300px;
+}

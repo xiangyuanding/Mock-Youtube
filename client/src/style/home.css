@@ -1,0 +1,25 @@
+.video{
+   list-Style-Type: '';
+   padding: 0;
+   max-width: 300;
+   flex-basis: 24%;
+   margin-right: 10px;
+}
+
+.videos {
+  display:flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 1500px;
+}
+
+img {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+figcaption {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+}
