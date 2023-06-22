@@ -19,7 +19,7 @@ export default function Home() {
     .then((videos) => {
       const shuffledList = shuffle(videos.items);
       const updateList=[];
-      for (let i = 0; i < 8; i++){
+      for (let i = 0; i < 9; i++){
         const id = shuffledList[i].id;
         const description = shuffledList[i].snippet.description;
         const cover = shuffledList[i].snippet.thumbnails.standard.url;
