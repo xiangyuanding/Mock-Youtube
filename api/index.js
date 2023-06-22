@@ -40,26 +40,42 @@ app.get("/videos", requireAuth, async (req, res) => {
     where: {
       auth0Id,
     },
+    include: { favourites: true },
   });
+
   res.json(user.favourites);
 });
 
-
-app.post("/create", requireAuth, async (req, res) => {
-  const {id, description, cover, title} = req.body;
+app.get("/channels", requireAuth, async (req, res) => {
   const auth0Id = req.auth.payload.sub;
-  const video = prisma.Video.findUnique({
+  const user = await prisma.User.findUnique({
+    where: {
+      auth0Id,
+    },
+    include: { subscriptions: true },
+  });
+
+  res.json(user.subscriptions);
+});
+
+app.post("/video", requireAuth, async (req, res) => {
+  const {id, cover, title} = req.body;
+  const description=req.body.description.slice(0, 99);
+  const auth0Id = req.auth.payload.sub;
+  const video = await prisma.Video.findUnique({
     where: {
       id,
     },
   });
+
   if(!video){
-    const video = await prisma.Video.create({
+    await prisma.Video.create({
       data: {
         id, 
         description, 
         cover, 
-        title
+        title,
+        user: { connect: { auth0Id: auth0Id } }
       },
     });
   }
@@ -67,55 +83,101 @@ app.post("/create", requireAuth, async (req, res) => {
     where: {
       auth0Id,
     },
-    data: { favourites: { connect: { id: id } } },
+    data: { 
+      favourites: { connect: { id: id } } 
+    },
   });
 
   res.json(video);
+});
+
+app.post("/channel", requireAuth, async (req, res) => {
+  const {id, avatar, name} = req.body;
+  const description=req.body.description.slice(0, 99);
+  const auth0Id = req.auth.payload.sub;
+  const channel = await prisma.Channel.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if(!channel){
+    await prisma.Channel.create({
+      data: {
+        id, 
+        description, 
+        avatar, 
+        name,
+        user: { connect: { auth0Id: auth0Id } }
+      },
+    });
+  }
+  prisma.User.update({
+    where: {
+      auth0Id,
+    },
+    data: { 
+      subscriptions: { connect: { id: id } } 
+    },
+  });
+
+  res.json(channel);
 });
 
 
 app.delete("/video/:id", requireAuth, async (req, res) => {
   const id = req.params.id;
   const auth0Id = req.auth.payload.sub;
-  const video = prisma.Video.findUnique({
+  const user = await prisma.User.findUnique({
     where: {
-      id,
+      auth0Id,
     },
   });
-  if (!video) {
-    res.json(video);
-  } else {
-    prisma.User.update({
-      where: {
-        auth0Id,
-      },
-      data: { favourites: { disconnect: { id: id } } },
-    });
+  const userId=user.id;
 
-    res.json(video);
-  }
+  const video = await prisma.Video.deleteMany({
+    where: {
+      AND: [
+        { id:id },
+        { userId:userId },
+      ],
+    },
+  });
+  res.json(video);
 });
-/**
-app.get("/note/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-  const note = await prisma.notedb.findUnique({
-    where:{
-      id:id,
-    }
-  })
-  res.json(note);
+
+app.delete("/channel/:id", requireAuth, async (req, res) => {
+  const id = req.params.id;
+  const auth0Id = req.auth.payload.sub;
+  const user = await prisma.User.findUnique({
+    where: {
+      auth0Id,
+    },
+  });
+  const userId=user.id;
+
+  const channel = await prisma.Channel.deleteMany({
+    where: {
+      AND: [
+        { id:id },
+        { userId:userId },
+      ],
+    },
+  });
+  res.json(channel);
 });
- */
-app.put("/note/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
+
+app.put("/user/:auth0Id", requireAuth, async (req, res) => {
+  const auth0Id = req.params.auth0Id;
   const body = req.body;
-  const note = await prisma.notedb.update({
+  
+  const data = await prisma.User.update({
     where:{
-      id:id,
+      auth0Id,
     },
     data: body,
   })
-  res.json(note);
+  res.json(data);
 });
 
 app.post("/verify-user", requireAuth, async (req, res) => {

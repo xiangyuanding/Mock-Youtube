@@ -61,11 +61,9 @@ root.render(
               <Route path="/details/:id" element={<Video />} />
               <Route path="/channel/:id" element={<Channel />} />
               <Route path="profile" element={<Profile />}/>
-              </Route>    
-                <Route path="favourites" element={<Favourites />} />
-                <Route path="subscriptions" element={<Subscriptions />} />
-              
-
+              <Route path="favourites" element={<Favourites />} />
+              <Route path="subscriptions" element={<Subscriptions />} />
+            </Route>    
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

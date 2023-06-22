@@ -36,20 +36,20 @@ export default function Home() {
   }
 
   return (
-    
-      <ul className="videos">
-        {videoList.map((item) => {
-          return (
-            <li className="video" key={item.id}>
-              <a href="">
-                <img src={item.cover} alt="" onClick={()=>clickVideo(item)}/>
-              </a>
-              <figcaption>{item.title}</figcaption>
-            </li>
-            
-          );
-        })}
-      </ul>
+  
+    <ul className="videos">
+      {videoList.map((item) => {
+        return (
+          <li className="video" key={item.id}>
+            <a href="">
+              <img src={item.cover} alt="" onClick={()=>clickVideo(item)}/>
+            </a>
+            <figcaption>{item.title}</figcaption>
+          </li>
+          
+        );
+      })}
+    </ul>
     
   )
 }

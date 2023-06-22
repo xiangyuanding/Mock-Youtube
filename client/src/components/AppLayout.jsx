@@ -26,8 +26,14 @@ export default function AppLayout() {
     if (eventKey==="2"){
       navigate("/profile")
     }
+    if (eventKey==="3"){
+      navigate("/subscriptions")
+    }
+    if (eventKey==="4"){
+      navigate("/favourites")
+    }
     if (eventKey==="5"){
-      console.log(isAuthenticated)
+      navigate("/")
     }
   };
 

@@ -1,0 +1,22 @@
+.button-channel{
+  display: flex;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+.channel-title{
+  width: 200px;
+  font-size: 18px;
+  background-color: rgb(221, 236, 250);
+}
+
+.delete-button{
+  color: red;
+  height: 30px;
+  background-color: aqua;
+}
+
+.subscrption{
+  display: flex;
+  max-width: 450px;
+}

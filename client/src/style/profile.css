@@ -1,0 +1,47 @@
+.center{
+  align-items: center;
+  font-size: 18px;
+  width: 500px;
+}
+
+h1{
+  min-height: 100px;
+}
+
+p{
+  min-height: 50px;
+  word-wrap: break-word;
+}
+
+.editable{
+  max-width: 350px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 0;
+  margin-left: 3px;
+}
+
+.unchangable{
+  max-width: 100px;
+  display: inline-block;
+}
+
+.edit-item {
+  background-color: rgb(250, 146, 11);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.activate {
+  border: 3px solid rgb(3, 3, 3);
+}
+
+.done {
+  background-color: rgb(4, 252, 66);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
