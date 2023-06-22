@@ -42,7 +42,7 @@ export default function Home() {
         return (
           <li className="video" key={item.id}>
             <a href="">
-              <img src={item.cover} alt="" onClick={()=>clickVideo(item)}/>
+              <img src={item.cover} alt={item?.title} onClick={()=>clickVideo(item)}/>
             </a>
             <figcaption>{item.title}</figcaption>
           </li>

@@ -103,7 +103,7 @@ export default function Video() {
     <div>
       <ToastContainer autoClose={1000}/>
       <div className="video-self">
-        <iframe className="video-player" width="1000" height="720" src={`https://www.youtube.com/embed/${id}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+        <iframe className="video-player" alt={video?.title} width="1000" height="720" src={`https://www.youtube.com/embed/${id}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
         <div>
           <button className='channnel-subscribe' onClick={()=>subscribeChannel()}>
             <img className="subscribe" src={channel?.avatar} />
