@@ -23,7 +23,7 @@
   margin-block-end: 0em;
 }
 
-@media (max-width: 500px){
+@media (max-width: 1300px){
   .video-player{
     width: calc(100vw - 56px);
     height: 50vw;
