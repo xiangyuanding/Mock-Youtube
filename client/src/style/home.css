@@ -23,3 +23,14 @@ figcaption {
   background-color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
 }
+
+@media (max-width: 500px){
+  .videos {
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style: none;
+    max-width: calc(100vw - 56px);
+    padding-inline-start: 0px;
+  }
+}

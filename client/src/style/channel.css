@@ -20,3 +20,17 @@
   display: flex;
   max-width: 450px;
 }
+
+@media (max-width: 500px){
+  ul{
+    padding-inline-start: 0px;
+  }
+
+  .subscrption{
+    max-width: calc(100vw - 56px);
+  }
+
+  .channel-title{
+    width: calc(100vw - 187px);;
+  }
+}

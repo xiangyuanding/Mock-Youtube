@@ -22,7 +22,7 @@ p{
 }
 
 .unchangable{
-  max-width: 100px;
+  max-width: 105px;
   display: inline-block;
 }
 
@@ -44,4 +44,23 @@ p{
   border: none;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+@media (max-width: 500px){
+  h1{
+    max-width: calc(100vw - 56px);
+  }
+  
+  .center{
+    max-width: calc(100vw - 56px);
+  }
+
+  .folder-content{
+    max-width: calc(100vw - 56px);
+  }
+
+  .editable{
+    max-width: calc(100vw - 56px);
+    margin-left: 0px;
+  }
 }

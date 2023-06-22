@@ -92,7 +92,7 @@ export default function Profile() {
         <p>Email: {user?.email}</p> 
         <p>auth0Id: {user?.auth0Id}</p> 
         <div className="same-line">
-          <p className="unchangable">Description: </p>
+          <p className="unchangable">Description:</p>
           <p className="editable">{user?.description}</p> 
         </div>
 

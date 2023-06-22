@@ -18,3 +18,18 @@
   display: flex;
   max-width: 450px;
 }
+
+@media (max-width: 500px){
+  ul{
+    padding-inline-start: 0px;
+  }
+
+  .favourite{
+    max-width: calc(100vw - 56px);
+  }
+
+  .button-video{
+    max-width: calc(100vw - 87px);
+    padding: 0px;
+  }
+}

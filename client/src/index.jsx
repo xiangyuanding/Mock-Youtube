@@ -2,7 +2,6 @@ import React from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
-import Channel from "./components/Channel";
 import Favourites from "./components/Favourites";
 import Subscriptions from "./components/Subscriptions";
 import Video from "./components/Video";
@@ -59,7 +58,6 @@ root.render(
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Home />} />
               <Route path="/details/:id" element={<Video />} />
-              <Route path="/channel/:id" element={<Channel />} />
               <Route path="profile" element={<Profile />}/>
               <Route path="favourites" element={<Favourites />} />
               <Route path="subscriptions" element={<Subscriptions />} />

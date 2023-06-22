@@ -5,10 +5,15 @@ import React, {useState} from "react";
 import { Sidenav, Nav, Avatar } from 'rsuite';
 import { Outlet, Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import GearIcon from '@rsuite/icons/Gear';
+import PlayOutlineIcon from '@rsuite/icons/PlayOutline';
+import AdminIcon from '@rsuite/icons/Admin';
+import ExitIcon from '@rsuite/icons/Exit';
+import ExploreIcon from '@rsuite/icons/Explore';
 
 export default function AppLayout() {
   const { isAuthenticated, user, isLoading, logout, loginWithRedirect} = useAuth0();
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -51,7 +56,7 @@ export default function AppLayout() {
                   <Avatar src={user.picture} alt="Image" />
                 )}
                 
-                <Nav.Item eventKey="1">
+                <Nav.Item eventKey="1" icon={<ExitIcon />}>
                   {!isAuthenticated ? (
                       "Login"
                   ) : (
@@ -59,19 +64,19 @@ export default function AppLayout() {
                   )}
                 </Nav.Item>
                 <br/>
-                <Nav.Item eventKey="2">
+                <Nav.Item eventKey="2" icon={<GearIcon />}>
                   Profile
                 </Nav.Item>
                 <br/>
-                <Nav.Item eventKey="3">
+                <Nav.Item eventKey="3" icon={<AdminIcon />}>
                   Subscriptions
                 </Nav.Item>
                 <br/>
-                <Nav.Item eventKey="4">
+                <Nav.Item eventKey="4" icon={<PlayOutlineIcon />}>
                   Favourites
                 </Nav.Item>
                 <br/>
-                <Nav.Item eventKey="5">
+                <Nav.Item eventKey="5" icon={<ExploreIcon />}>
                   Homepage
                 </Nav.Item>
               </Nav>
