@@ -49,6 +49,8 @@ export default function Favourites() {
       }
       return response.json();
     });
+    const newList=videoList.filter((element) => element.id !== item.id);
+    setVideoList(newList);
   }
 
 function gotoVideo(item){
@@ -66,7 +68,7 @@ function gotoVideo(item){
                 <img width="150" src={item.cover} alt=""/>
                 <p className="video-title">{item.title}</p>
               </button>
-              <a href=""><button className="delete-button" onClick={()=>deleteVideo(item)}>X</button></a>
+              <button className="delete-button" onClick={()=>deleteVideo(item)}>X</button>
             </div>
           </li>
         );

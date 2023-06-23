@@ -1,7 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, getByAttribute } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Profile from "../components/Profile";
 import { enableFetchMocks } from "jest-fetch-mock";
+import { act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
+
 enableFetchMocks();
 
 jest.mock("@auth0/auth0-react", () => ({
@@ -24,31 +28,40 @@ jest.mock("@auth0/auth0-react", () => ({
 }));
 
 jest.mock("../AuthToken", () => ({
-  ...jest.requireActual("../AuthToken"),
-  useAuthToken: ()=>{
-    return{
-      accessToken: "12345",
-    }
-  }
+  useAuthToken: () => {
+    return { accessToken: "123" };
+  },
 }));
 
 fetch.mockResponse(
-  JSON.stringify([
-    { id: 1, auth0Id: "subId", name:"Tom", description:"", completed: false },
-  ])
+  JSON.stringify(
+    { id: 1, auth0Id: "subId", email: "xiangyuanding@gmail.com", name:"Tom", description:"", favourites:[], subscription:[]},
+  )
 );
 
 
-test("renders Profile", () => {
+ test("test renders", async() => {
   render(
     <MemoryRouter initialEntries={["/"]}>
       <Profile />
-    </MemoryRouter>
-  );
+    </MemoryRouter>)
 
-  expect(screen.getByText("Name:")).toBeInTheDocument();
-  expect(screen.getByText("Tom")).toBeInTheDocument();
+  const tom = await screen.findByText("Tom");
+  expect(screen.getByText("User name:")).toBeInTheDocument();
+  expect(tom).toBeInTheDocument();
   expect(screen.getByText("Email: xiangyuanding@gmail.com")).toBeInTheDocument();
   expect(screen.getByText("auth0Id: subId")).toBeInTheDocument();
   expect(screen.getByText("Description:")).toBeInTheDocument();
 });
+
+test("button works", async() => {
+  const { container } = render(
+    <MemoryRouter initialEntries={["/"]}>
+      <Profile />
+    </MemoryRouter>)
+    
+  const enterAppButton = await screen.findByText("edit🖊");
+  await userEvent.click(enterAppButton);
+  expect(screen.getByText("Done✔")).toBeInTheDocument();
+  expect(container.querySelector('.editable')).toHaveAttribute("contenteditable");
+})

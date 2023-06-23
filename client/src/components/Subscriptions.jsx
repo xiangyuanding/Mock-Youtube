@@ -47,6 +47,8 @@ export default function Favourites() {
       }
       return response.json();
     });
+    const newList=channelList.filter((element) => element.id !== item.id);
+    setChannelList(newList);
   }
 
   return (
@@ -60,7 +62,7 @@ export default function Favourites() {
                 <img width="100" src={item.avatar} alt=""/>
                 <p className="channel-title">{item.name}</p>
               </div>
-              <a href=""><button className="delete-button" onClick={()=>deleteChannel(item)}>X</button></a>
+              <button className="delete-button" onClick={()=>deleteChannel(item)}>X</button>
             </div>
           </li>
         );
