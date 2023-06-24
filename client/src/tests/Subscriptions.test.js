@@ -1,6 +1,6 @@
-import { render, screen, getByAttribute } from "@testing-library/react";
+import { render, screen, getByAttribute, queryAllByText } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Favourites from "../components/Favourites";
+import Subscriptions from "../components/Subscriptions";
 import fetchMock from 'jest-fetch-mock'
 import { act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -27,7 +27,6 @@ jest.mock("@auth0/auth0-react", () => ({
   },
 }));
 
-fetchMock.mockResponse(JSON.stringify({ message: 'Success' }));
 
 jest.mock("../AuthToken", () => ({
   useAuthToken: () => {
@@ -54,9 +53,9 @@ fetch.mockResponse(
 
 
 test("test renders", async() => {
-  const { container } = await render(
+  const { container } =  render(
     <MemoryRouter initialEntries={["/"]}>
-      <Favourites />
+      <Subscriptions />
     </MemoryRouter>)
 
   const title = await screen.findByText("abc");
@@ -72,13 +71,15 @@ test("test renders", async() => {
 });
 
 
-test("button deletes", async() => {
+test("button makes a delete call", async() => {
   render(
     <MemoryRouter initialEntries={["/"]}>
-      <Favourites />
+      <Subscriptions />
     </MemoryRouter>)
-    
-  const enterAppButton = screen.queryByText("X");
-  await userEvent.click(enterAppButton);
-  expect(fetchMock).toHaveBeenCalled();
+
+  const buttonList = await screen.findAllByText("X");
+  expect(buttonList).toHaveLength(3);
+  await userEvent.click(buttonList[0]);
+  const buttonListNow = await screen.findAllByText("X");
+  expect(buttonListNow).toHaveLength(2);
 })

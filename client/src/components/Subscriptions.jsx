@@ -34,7 +34,7 @@ export default function Favourites() {
   }, [accessToken]);
 
   async function deleteChannel(item){
-    fetch(`http://localhost:8000/channel/${item.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/channel/${item.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

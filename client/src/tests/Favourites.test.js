@@ -1,4 +1,4 @@
-import { render, screen, getByAttribute } from "@testing-library/react";
+import { render, screen, getByAttribute, queryAllByText } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Favourites from "../components/Favourites";
 import fetchMock from 'jest-fetch-mock'
@@ -53,7 +53,7 @@ fetch.mockResponse(
 
 
 test("test renders", async() => {
-  const { container } = await render(
+  const { container } =  render(
     <MemoryRouter initialEntries={["/"]}>
       <Favourites />
     </MemoryRouter>)
@@ -72,19 +72,16 @@ test("test renders", async() => {
 
 
 test("button makes a delete call", async() => {
-  const { container } = await render(
+  render(
     <MemoryRouter initialEntries={["/"]}>
       <Favourites />
     </MemoryRouter>)
-  const enterAppButton = container.querySelector(".delete-button");
-  await userEvent.click(enterAppButton);
-  await screen.findByText("abc");
-  const deleteRequest = fetchMock.mock.calls[fetchMock.mock.calls.length-1];
-  setTimeout(1000);
-  console.log(container.innerHTML);
-  
-  expect(screen.getByText("abc")).toBeInTheDocument();
-  //sexpect(deleteRequest[1].method).toBe("DELETE");
+
+  const buttonList = await screen.findAllByText("X");
+  expect(buttonList).toHaveLength(3);
+  await userEvent.click(buttonList[0]);
+  const buttonListNow = await screen.findAllByText("X");
+  expect(buttonListNow).toHaveLength(2);
 })
 
 test("button navigates to /details/", async () => {

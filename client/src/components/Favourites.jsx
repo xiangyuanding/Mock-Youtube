@@ -36,7 +36,7 @@ export default function Favourites() {
   }, [accessToken]);
 
   async function deleteVideo(item){
-    fetch(`http://localhost:8000/video/${item.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/video/${item.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

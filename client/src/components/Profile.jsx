@@ -52,7 +52,7 @@ export default function Profile() {
       name: paragraphs[0].textContent,
       description: paragraphs[1].textContent
     }
-    fetch(`http://localhost:8000/user/${user.auth0Id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${user.auth0Id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

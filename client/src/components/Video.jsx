@@ -61,7 +61,7 @@ export default function Video() {
     if (!isLoading && !isAuthenticated) {
       loginWithRedirect();
     }
-    fetch(`http://localhost:8000/video`, {
+    fetch(`${process.env.REACT_APP_API_URL}/video`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export default function Video() {
     if (!isLoading && !isAuthenticated) {
       loginWithRedirect();
     }
-    fetch(`http://localhost:8000/channel`, {
+    fetch(`${process.env.REACT_APP_API_URL}/channel`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
