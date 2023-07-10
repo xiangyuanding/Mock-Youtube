@@ -1,7 +1,7 @@
 runtime: nodejs16
 env_variables:
   AUTH0_JWK_URI: "https://assignment3.api"
-  DATABASE_URL: 'mysql://i2u2nysdq1fwzphluzox:pscale_pw_lVMekzJ17Ri04t1eZof8DTst5anRMQZWUxc2bEPAznB@aws.connect.psdb.cloud/deploy-test?sslaccept=strict'
+  DATABASE_URL: 'mysql://username:password@aws.connect.psdb.cloud/deploy-test?sslaccept=strict'
   AUTH0_AUDIENCE: "https://assignment3.api"
   AUTH0_ISSUER: "https://yukumo29.us.auth0.com/"
   PORT: 8080
